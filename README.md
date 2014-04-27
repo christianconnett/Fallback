@@ -1,6 +1,6 @@
 # Fallback v1.1
 
-Fallback is a Sass partial of mixins and functions that convert rem units to pixel units and has partial shorthand support.
+Fallback is a Sass partial of mixins and functions that convert rem units to pixel units and has shorthand support.
 
 
 
