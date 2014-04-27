@@ -1,12 +1,6 @@
-<<<<<<< HEAD
 # Fallback v1.2
 
 Fallback is a Sass partial of mixins and functions that converts rem units to pixel units and adds more shorthand.
-=======
-# Fallback v1.1
-
-Fallback is a Sass partial of mixins and functions that convert rem units to pixel units and has shorthand support.
->>>>>>> FETCH_HEAD
 
 
 
@@ -76,11 +70,7 @@ Fallback is a Sass partial of mixins and functions that convert rem units to pix
 	width: 1rem;
 ```
 ### Px
-<<<<<<< HEAD
 *Not For Use*
-=======
-*Not to be used in stylesheets besides _fallback.scss*
->>>>>>> FETCH_HEAD
 ```scss
 // SCSS
 	width: #{px(16)};
