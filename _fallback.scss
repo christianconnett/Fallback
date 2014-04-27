@@ -1,0 +1,288 @@
+// Fallback v1.0
+// Dustin Dowell 2014
+// https://github.com/dustindowell22/Fallback
+//
+// Some info and rules.
+//	1. ONLY use pixel units.
+//
+//	3. Exclude the px. It's appended automatically.
+//		input:
+//			@include rem(margin-top, 16);
+//
+//		output:
+//			margin-top: 16px;
+//			margin-top: 1rem;
+//
+//	4. Use "x", without quotes, if you want to use shorthand, but don't want to redefine a value.
+//		input:
+//			@include margin(16, x, x, 16);
+//
+//		output:
+//			margin-top: 16px;
+//			margin-left: 16px;
+//			margin-top: 1rem;
+//			margin-left: 1rem;
+//
+//	5. To convert rems within parenthesis you must interpolate.
+//		input:
+//			width: calc(25% - #{rem(16)});
+//
+//		output:
+//			width: calc(25% - 1rem);
+
+
+// Calculate
+@function px($value){
+	@return $value + px;
+}
+@function rem($value){
+	$remValue: ($value / 16);
+	@return $remValue + rem;
+}
+
+
+// Basic
+@mixin rem($property, $values){
+	@each $value in $values{
+		@if ($value == type-of(string)) and ($value != x){
+			#{$property}: $value;
+		}
+		@else if ($value != x){
+			#{$property}: px($value);
+			#{$property}: rem($value);
+		}
+	}
+}
+
+
+// Width and Height
+@mixin size($width, $height){
+	@if ($width == type-of(string)) and ($width != x){
+		width: $width;
+	}
+	@else if ($width != x){
+		width: px($width);
+		width: rem($width);
+	}
+
+	@if ($height == type-of(string)) and ($height != x){
+		height: $height;
+	}
+	@else if ($height != x){
+		height: px($height);
+		height: rem($height);
+	}
+}
+
+
+// Margin
+@mixin margin($top, $right, $bottom, $left){
+	// Top
+	@if ($top == type-of(string)) and ($top != x){
+		margin-top: $top;
+	}
+	@else if ($top != x){
+		margin-top: px($top);
+		margin-top: rem($top);
+	}
+
+	// Right
+	@if ($right == type-of(string)) and ($right != x){
+		margin-right: $right;
+	}
+	@else if ($right != x){
+		margin-right: px($right);
+		margin-right: rem($right);
+	}
+
+	// Bottom
+	@if ($bottom == type-of(string)) and ($bottom != x){
+		margin-bottom: $bottom;
+	}
+	@else if ($bottom != x){
+		margin-bottom: px($bottom);
+		margin-bottom: rem($bottom);
+	}
+
+	// Left
+	@if ($left == type-of(string)) and ($left != x){
+		margin-left: $left;
+	}
+	@else if ($left != x){
+		margin-left: px($left);
+		margin-left: rem($left);
+	}
+}
+
+
+// Padding
+@mixin padding($top, $right, $bottom, $left){
+	// Top
+	@if ($top == type-of(string)) and ($top != x){
+		padding-top: $top;
+	}
+	@else if ($top != x){
+		padding-top: px($top);
+		padding-top: rem($top);
+	}
+
+	// Right
+	@if ($right == type-of(string)) and ($right != x){
+		padding-right: $right;
+	}
+	@else if ($right != x){
+		padding-right: px($right);
+		padding-right: rem($right);
+	}
+
+	// Bottom
+	@if ($bottom == type-of(string)) and ($bottom != x){
+		padding-bottom: $bottom;
+	}
+	@else if ($bottom != x){
+		padding-bottom: px($bottom);
+		padding-bottom: rem($bottom);
+	}
+
+	// Left
+	@if ($left == type-of(string)) and ($left != x){
+		padding-left: $left;
+	}
+	@else if ($left != x){
+		padding-left: px($left);
+		padding-left: rem($left);
+	}
+}
+
+
+// Border Width
+@mixin borderWidth($top, $right, $bottom, $left){
+	// Top
+	@if ($top == type-of(string)) and ($top != x){
+		border-width-top: $top;
+	}
+	@else if ($top != x){
+		border-width-top: px($top);
+		border-width-top: rem($top);
+	}
+
+	// Right
+	@if ($right == type-of(string)) and ($right != x){
+		border-width-right: $right;
+	}
+	@else if ($right != x){
+		border-width-right: px($right);
+		border-width-right: rem($right);
+	}
+
+	// Bottom
+	@if ($bottom == type-of(string)) and ($bottom != x){
+		border-width-bottom: $bottom;
+	}
+	@else if ($bottom != x){
+		border-width-bottom: px($bottom);
+		border-width-bottom: rem($bottom);
+	}
+
+	// Left
+	@if ($left == type-of(string)) and ($left != x){
+		border-width-left: $left;
+	}
+	@else if ($left != x){
+		border-width-left: px($left);
+		border-width-left: rem($left);
+	}
+}
+
+
+// Position
+@mixin position($top, $right, $bottom, $left){
+	// Top
+	@if ($top == type-of(string)) and ($top != x){
+		top: $top;
+	}
+	@else if ($top != x){
+		top: px($top);
+		top: rem($top);
+	}
+
+	// Right
+	@if ($right == type-of(string)) and ($right != x){
+		right: $right;
+	}
+	@else if ($right != x){
+		right: px($right);
+		right: rem($right);
+	}
+
+	// Bottom
+	@if ($bottom == type-of(string)) and ($bottom != x){
+		bottom: $bottom;
+	}
+	@else if ($bottom != x){
+		bottom: px($bottom);
+		bottom: rem($bottom);
+	}
+
+	// Left
+	@if ($left == type-of(string)) and ($left != x){
+		left: $left;
+	}
+	@else if ($left != x){
+		left: px($left);
+		left: rem($left);
+	}
+}
+
+
+// Translate 2D
+@mixin translate2D($x, $y){
+	// X
+	@if ($x == type-of(string)) and ($x != x){
+		transform: translateX($x);
+	}
+	@else if ($x != x){
+		transform: translateX( px($x) );
+		transform: translateX( rem($x) );
+	}
+
+	// Y
+	@if ($y == type-of(string)) and ($y != x){
+		transform: translateY($y);
+	}
+	@else if ($y != x){
+		transform: translateY( px($y) );
+		transform: translateY( rem($y) );
+	}
+}
+
+
+// Translate 3D
+@mixin translate3D($x, $y, $z){
+	// X
+	@if ($x == type-of(string)) and ($x != x){
+		transform: translateX($x);
+	}
+	@else if ($x != x){
+		transform: translateX( px($x) );
+		transform: translateX( rem($x) );
+	}
+
+	// Y
+	@if ($y == type-of(string)) and ($y != x){
+		transform: translateY($y);
+	}
+	@else if ($y != x){
+		transform: translateY( px($y) );
+		transform: translateY( rem($y) );
+	}
+
+	// Z
+	@if ($z == type-of(string)) and ($z != x){
+		transform: translateY($z);
+	}
+	@else if ($z != x){
+		transform: translateZ( px($z) );
+		transform: translateZ( rem($z) );
+	}
+}
