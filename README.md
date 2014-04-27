@@ -1,4 +1,4 @@
-# Fallback
+# Fallback v1.1
 
 Fallback is a Sass partial of mixins and functions that convert rem units to pixel units and has partial shorthand support.
 
@@ -53,7 +53,7 @@ Fallback is a Sass partial of mixins and functions that convert rem units to pix
 	width: 1rem;
 ```
 ### Px
-*Not to be used in stylesheets besides this one.*
+*Not to be used in stylesheets besides _fallback.scss*
 ```scss
 // SCSS
 	width: #{px(16)};
