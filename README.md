@@ -22,7 +22,7 @@ Fallback is a Sass partial of mixins and functions that convert rem units to pix
 3. Use "x", without quotes, if you want to use shorthand, but don't want to redefine a value.
 	```scss
 	// SCSS
-		@include margin(16, x, x, 16);
+		@include remBlock(margin, 16, x, x, 16);
 	```
 	````css
 	/* CSS */
@@ -32,7 +32,7 @@ Fallback is a Sass partial of mixins and functions that convert rem units to pix
 		margin-left: 1rem;
 	```
 
-4. To convert rems within parenthesis you must interpolate.
+4. To convert rems within parenthesis using the function you must interpolate.
 	```scss
 	// SCSS
 		width: calc(25% - #{rem(16)});
@@ -41,6 +41,27 @@ Fallback is a Sass partial of mixins and functions that convert rem units to pix
 	/* CSS */
 		width: calc(25% - 1rem);
 	```
+
+## Functions
+### Rem
+```scss
+// SCSS
+	width: #{rem(16)};
+```
+```css
+/* CSS */
+	width: 1rem;
+```
+### Px
+*Not to be used in stylesheets besides this one.*
+```scss
+// SCSS
+	width: #{px(16)};
+```
+```css
+/* CSS */
+	width: 16px;
+```
 
 ## Mixins
 ### Rem
@@ -66,12 +87,11 @@ Fallback is a Sass partial of mixins and functions that convert rem units to pix
 	height: 16px;
 	width: 1rem;
 ```
-	@include margin($top, $right, $bottom, $left);
 		
-### Margin
+### Rem Block
 ```scss
 // SCSS
-	@include margin(16, 16, x, x);
+	@include remBlock(margin, 16, 16, x, x);
 ```
 ```css
 /* CSS */
@@ -80,31 +100,3 @@ Fallback is a Sass partial of mixins and functions that convert rem units to pix
 	margin-right: 16px;
 	margin-right: 1rem;
 ```
-
-### Padding
-```scss
-// SCSS
-	@include padding(x, x, 16, 16);
-```
-```css
-/* CSS */
-	margin-bottom: 16px;
-	margin-bottom: 1rem
-	margin-left: 16px;
-	margin-left: 1rem;
-```
-
-### Border-Width
-```scss
-// SCSS
-	@include borderWidth(16, 16, x, x);
-```
-```css
-/* CSS */
-	border-width-top: 16px;
-	border-width-top: 1rem
-	border-width-right: 16px;
-	border-width-right: 1rem;
-```
-
-etc...
