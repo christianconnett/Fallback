@@ -1,4 +1,4 @@
-// Fallback v1.1
+// Fallback v1.2
 // Dustin Dowell 2014
 // https://github.com/dustindowell22/Fallback
 
@@ -32,7 +32,7 @@
 	$propertyDash: $property + "-";
 
 	// Position
-	@if($property == position){
+	@if ($property == position){
 		$propertyDash: "";
 	}
 
@@ -94,15 +94,15 @@
 }
 
 
-// Translate 2D
-@mixin translate2D($x, $y){
+// Translate
+@mixin translate($x, $y, $z){
 	// X
 	@if ($x == type-of(string)) and ($x != x){
 		transform: translateX($x);
 	}
 	@else if ($x != x){
-		transform: translateX( px($x) );
-		transform: translateX( rem($x) );
+		transform: translateX(px($x));
+		transform: translateX(rem($x));
 	}
 
 	// Y
@@ -110,30 +110,8 @@
 		transform: translateY($y);
 	}
 	@else if ($y != x){
-		transform: translateY( px($y) );
-		transform: translateY( rem($y) );
-	}
-}
-
-
-// Translate 3D
-@mixin translate3D($x, $y, $z){
-	// X
-	@if ($x == type-of(string)) and ($x != x){
-		transform: translateX($x);
-	}
-	@else if ($x != x){
-		transform: translateX( px($x) );
-		transform: translateX( rem($x) );
-	}
-
-	// Y
-	@if ($y == type-of(string)) and ($y != x){
-		transform: translateY($y);
-	}
-	@else if ($y != x){
-		transform: translateY( px($y) );
-		transform: translateY( rem($y) );
+		transform: translateY(px($y));
+		transform: translateY(rem($y));
 	}
 
 	// Z
@@ -141,7 +119,7 @@
 		transform: translateY($z);
 	}
 	@else if ($z != x){
-		transform: translateZ( px($z) );
-		transform: translateZ( rem($z) );
+		transform: translateZ(px($z));
+		transform: translateZ(rem($z));
 	}
 }
