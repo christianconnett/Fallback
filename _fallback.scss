@@ -1,4 +1,4 @@
-// Fallback v1.2
+// Fallback v1.3
 // Dustin Dowell 2014
 // https://github.com/dustindowell22/Fallback
 
@@ -27,49 +27,75 @@
 }
 
 
-// Rem Block 4
-@mixin remBlock($property, $top, $right, $bottom, $left){
+// Rem Block
+@mixin remBlock($property, $top: "", $right: "", $bottom: "", $left: ""){
 	$propertyDash: $property + "-";
 
-	// Position
+	// Do not include a dash
 	@if ($property == position){
 		$propertyDash: "";
 	}
 
-	// Top
-	@if ($top == type-of(string)) and ($top != x){
-		#{$propertyDash}top: $top;
+	// Acts like CSS shorthand when only using 2 augrments
+	@if ($bottom and $left == ""){
+		$bottom: $top;
+		$left: $right;
 	}
-	@else if ($top != x){
-		#{$propertyDash}top: px($top);
-		#{$propertyDash}top: rem($top);
+
+	// Top
+	@each $value in $top{
+		@if ($value == type-of(string)) and ($value != x){
+			#{$propertyDash}top: $value;
+		}
+		@else if ($value == 0){
+			#{$propertyDash}top: 0;
+		}
+		@else if ($value != x){
+			#{$propertyDash}top: px($value);
+			#{$propertyDash}top: rem($value);
+		}
 	}
 
 	// Right
-	@if ($right == type-of(string)) and ($right != x){
-		#{$propertyDash}right: $right;
-	}
-	@else if ($right != x){
-		#{$propertyDash}right: px($right);
-		#{$propertyDash}right: rem($right);
+	@each $value in $right{
+		@if ($value == type-of(string)) and ($value != x){
+			#{$propertyDash}right: $value;
+		}
+		@else if ($value == 0){
+			#{$propertyDash}right: 0;
+		}
+		@else if ($value != x){
+			#{$propertyDash}right: px($value);
+			#{$propertyDash}right: rem($value);
+		}
 	}
 
 	// Bottom
-	@if ($bottom == type-of(string)) and ($bottom != x){
-		#{$propertyDash}bottom: $bottom;
-	}
-	@else if ($bottom != x){
-		#{$propertyDash}bottom: px($bottom);
-		#{$propertyDash}bottom: rem($bottom);
+	@each $value in $bottom{
+		@if ($value == type-of(string)) and ($value != x){
+			#{$propertyDash}bottom: $value;
+		}
+		@else if ($value == 0){
+			#{$propertyDash}top: 0;
+		}
+		@else if ($value != x){
+			#{$propertyDash}bottom: px($value);
+			#{$propertyDash}bottom: rem($value);
+		}
 	}
 
 	// Left
-	@if ($left == type-of(string)) and ($left != x){
-		#{$propertyDash}left: $left;
-	}
-	@else if ($left != x){
-		#{$propertyDash}left: px($left);
-		#{$propertyDash}left: rem($left);
+	@each $value in $left{
+		@if ($value == type-of(string)) and ($value != x){
+			#{$propertyDash}left: $value;
+		}
+		@else if ($value == 0){
+			#{$propertyDash}left: 0;
+		}
+		@else if ($value != x){
+			#{$propertyDash}left: px($value);
+			#{$propertyDash}left: rem($value);
+		}
 	}
 }
 
