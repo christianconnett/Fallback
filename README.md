@@ -1,4 +1,4 @@
-# Fallback v1.2
+# Fallback v1.3
 Fallback is a Sass partial of mixins and functions that converts rem units to pixel units and adds more shorthand.
 
 
@@ -141,10 +141,13 @@ If only two plains are desired, use an x on the z variable.
 
 ## To-do
 + Compile css shorthand when possible
-+ Add optional arguments
++ Add optional arguments for all mixins
 + Automate browser prefixes for CSS3
 
 ## Changelog
++ v1.3
+	+ Added optional auguments for remBlock
+	+ Added multiple vaules for auguments, though, not very useful just yet
 + v1.2
 	+ Merged translate2d and translate3d mixins
 + v1.1
