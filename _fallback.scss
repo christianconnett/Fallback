@@ -1,151 +1,155 @@
-// Fallback v1.3
+// Fallback v1.4
 // Dustin Dowell 2014
 // https://github.com/dustindowell22/Fallback
 
 
 // Calculate
+
 @function px($value){
 	@return $value + px;
 }
+
 @function rem($value){
 	$remValue: ($value / 16);
 	@return $remValue + rem;
 }
 
 
-// Basic
-@mixin rem($property, $values){
-	@each $value in $values{
-		@if ($value == type-of(string)) and ($value != x){
-			#{$property}: $value;
-		}
-		@else if ($value != x){
-			#{$property}: px($value);
-			#{$property}: rem($value);
-		}
-	}
-}
+// Rem
 
+@mixin rem($property: "", $values: "", $important: ""){
 
-// Rem Block
-@mixin remBlock($property, $top: "", $right: "", $bottom: "", $left: ""){
-	$propertyDash: $property + "-";
-
-	// Do not include a dash
-	@if ($property == position){
-		$propertyDash: "";
+	$propertyDash: unquote("");
+	@if ($property != "position"){
+		$propertyDash: unquote($property + "-");
 	}
 
-	// Acts like CSS shorthand when only using 2 augrments
-	@if ($bottom and $left == ""){
-		$bottom: $top;
-		$left: $right;
+	$importantSpace: unquote("");
+	@if ($important == "!important"){
+		$importantSpace: unquote(" " + $important);
 	}
 
-	// Top
-	@each $value in $top{
-		@if ($value == type-of(string)) and ($value != x){
-			#{$propertyDash}top: $value;
-		}
-		@else if ($value == 0){
-			#{$propertyDash}top: 0;
-		}
-		@else if ($value != x){
-			#{$propertyDash}top: px($value);
-			#{$propertyDash}top: rem($value);
+
+	// If 1 value is being passed
+
+	@if (length($values) == 1){
+
+		$value: $values;
+
+		@if ($value != x){
+
+			@if ($value == type-of(string)) or ($value == 0){
+				#{$property}: $value + $importantSpace;
+			}
+
+			@else{
+				#{$property}: px($value)  + $importantSpace;
+				#{$property}: rem($value) + $importantSpace;
+			}
+
 		}
 	}
 
-	// Right
-	@each $value in $right{
-		@if ($value == type-of(string)) and ($value != x){
-			#{$propertyDash}right: $value;
-		}
-		@else if ($value == 0){
-			#{$propertyDash}right: 0;
-		}
-		@else if ($value != x){
-			#{$propertyDash}right: px($value);
-			#{$propertyDash}right: rem($value);
+
+	// If 2 values are being passed
+
+	@if length($values) == 2{
+
+		@for $index from 1 through 2{
+			$value: nth($values, $index);
+
+			@if $value != x{
+
+				@if $value == type-of(string) or $value == 0{
+
+					@if $index == 1{
+						#{$propertyDash}top:    $value + $importantSpace;
+						#{$propertyDash}bottom: $value + $importantSpace;
+					}
+
+					@else if $index == 2{
+						#{$propertyDash}left:  $value + $importantSpace;
+						#{$propertyDash}right: $value + $importantSpace;
+					}
+
+				}
+
+				@else{
+
+					@if $index == 1{
+						#{$propertyDash}top:    px($value)  + $importantSpace;
+						#{$propertyDash}top:    rem($value) + $importantSpace;
+						#{$propertyDash}bottom: px($value)  + $importantSpace;
+						#{$propertyDash}bottom: rem($value) + $importantSpace;
+					}
+
+					@else if $index == 2{
+						#{$propertyDash}left:  px($value)  + $importantSpace;
+						#{$propertyDash}left:  rem($value) + $importantSpace;
+						#{$propertyDash}right: px($value)  + $importantSpace;
+						#{$propertyDash}right: rem($value) + $importantSpace;
+					}
+
+				}
+
+			}
 		}
 	}
 
-	// Bottom
-	@each $value in $bottom{
-		@if ($value == type-of(string)) and ($value != x){
-			#{$propertyDash}bottom: $value;
+
+	// If 4 values are being passed
+
+	@if (length($values) == 4){
+
+		@for $index from 1 through 4{
+			$value: nth($values, $index);
+
+			@if ($value != x){
+
+				@if ($value == type-of(string)) or ($value == 0){
+
+					@if ($index == 1){
+						#{$propertyDash}top: $value + $importantSpace;
+					}
+
+					@else if ($index == 2){
+						#{$propertyDash}right: $value + $importantSpace;
+					}
+
+					@else if ($index == 3){
+						#{$propertyDash}bottom: $value + $importantSpace;
+					}
+
+					@else if ($index == 4){
+						#{$propertyDash}left: $value + $importantSpace;
+					}
+
+				}
+
+				@else{
+
+					@if ($index == 1){
+						#{$propertyDash}top: px($value)  + $importantSpace;
+						#{$propertyDash}top: rem($value) + $importantSpace;
+					}
+
+					@else if ($index == 2){
+						#{$propertyDash}right: px($value)  + $importantSpace;
+						#{$propertyDash}right: rem($value) + $importantSpace;
+					}
+
+					@else if ($index == 3){
+						#{$propertyDash}bottom: px($value)  + $importantSpace;
+						#{$propertyDash}bottom: rem($value) + $importantSpace;
+					}
+
+					@else if ($index == 4){
+						#{$propertyDash}left: px($value)  + $importantSpace;
+						#{$propertyDash}left: rem($value) + $importantSpace;
+					}
+
+				}
+			}
 		}
-		@else if ($value == 0){
-			#{$propertyDash}top: 0;
-		}
-		@else if ($value != x){
-			#{$propertyDash}bottom: px($value);
-			#{$propertyDash}bottom: rem($value);
-		}
-	}
-
-	// Left
-	@each $value in $left{
-		@if ($value == type-of(string)) and ($value != x){
-			#{$propertyDash}left: $value;
-		}
-		@else if ($value == 0){
-			#{$propertyDash}left: 0;
-		}
-		@else if ($value != x){
-			#{$propertyDash}left: px($value);
-			#{$propertyDash}left: rem($value);
-		}
-	}
-}
-
-
-// Width and Height
-@mixin size($width, $height){
-	@if ($width == type-of(string)) and ($width != x){
-		width: $width;
-	}
-	@else if ($width != x){
-		width: px($width);
-		width: rem($width);
-	}
-
-	@if ($height == type-of(string)) and ($height != x){
-		height: $height;
-	}
-	@else if ($height != x){
-		height: px($height);
-		height: rem($height);
-	}
-}
-
-
-// Translate
-@mixin translate($x, $y, $z){
-	// X
-	@if ($x == type-of(string)) and ($x != x){
-		transform: translateX($x);
-	}
-	@else if ($x != x){
-		transform: translateX(px($x));
-		transform: translateX(rem($x));
-	}
-
-	// Y
-	@if ($y == type-of(string)) and ($y != x){
-		transform: translateY($y);
-	}
-	@else if ($y != x){
-		transform: translateY(px($y));
-		transform: translateY(rem($y));
-	}
-
-	// Z
-	@if ($z == type-of(string)) and ($z != x){
-		transform: translateY($z);
-	}
-	@else if ($z != x){
-		transform: translateZ(px($z));
-		transform: translateZ(rem($z));
 	}
 }

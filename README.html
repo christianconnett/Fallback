@@ -1,0 +1,136 @@
+<h1>Fallback v1.4</h1>
+
+<p>Fallback is currently a single Sass mixin with a couple small functions that convert rem units to pixel units. Oh, and it does it with shorthand code unlike other rem to px Sass mixins.</p>
+
+<h2>Rules and Stuff</h2>
+
+<ol>
+<li><p>Only use pixel units. Not rems.</p></li>
+<li><p>Don&rsquo;t include the px. The px is appended automatically.
+ <code>scss
+ // SCSS
+     @include rem(margin, 16);
+</code>
+ <code>css
+ /* CSS */
+     margin: 16px;
+     margin: 1rem;
+</code></p></li>
+<li><p>You can use shorthand!
+ <code>scss
+ // SCSS
+     @include rem(margin, 2 4 8 16);
+</code>
+ <code>`css
+ /* CSS */
+     margin-top: 2px;
+     margin-top: 0.125rem;
+     margin-right: 4px;
+     margin-right: 0.25rem;
+     margin-bottom: 8px;
+     margin-bottom: 0.5rem;
+     margin-left: 16px;
+     margin-left: 1rem;
+</code></p></li>
+<li><p>Use x to skip a value you don&rsquo;t want to re-define.
+ <code>scss
+ // SCSS
+     @include rem(margin, 16 x x 16);
+</code>
+ <code>`css
+ /* CSS */
+     margin-top: 16px;
+     margin-top: 1rem;
+     margin-left: 16px;
+     margin-left: 1rem;
+</code></p></li>
+<li><p>To convert rems within parenthesis, you must use the rem function and interpolate. This is purely to be use if you&rsquo;re too lazy to do math because you must manually specify a fallback.
+ <code>scss
+ // SCSS
+     width: calc(25% - 16px);
+     width: calc(25% - #{rem(16)});
+</code>
+ <code>css
+ /* CSS */
+     width: calc(25% - 16px);
+     width: calc(25% - 1rem);
+</code></p></li>
+<li><p>You can use shorthand for the position property.
+ <code>scss
+ // SCSS
+     @include rem(position, 2 4 8 16);
+</code>
+ <code>`css
+ /* CSS */
+     top: 2px;
+     top: 0.125rem;
+     right: 4px;
+     right: 0.25rem;
+     bottom: 8px;
+     bottom: 0.5rem;
+     left: 16px;
+     left: 1rem;
+</code></p></li>
+<li><p>You can make things important. Leave off the !, it&rsquo;s appended automatically.
+ <code>scss
+ // SCSS
+     @include rem(margin, 16 x x 16, important);
+</code>
+ <code>`css
+ /* CSS */
+     margin-top: 16px !important;
+     margin-top: 1rem !important;
+     margin-left: 16px !important;
+     margin-left: 1rem !important;
+</code></p></li>
+</ol>
+
+
+<h2>To-do</h2>
+
+<ul>
+<li>Compile CSS shorthand when possible</li>
+<li>Automate browser prefixes for CSS3</li>
+</ul>
+
+
+<h2>Changelog</h2>
+
+<ul>
+<li>v1.4
+
+<ul>
+<li>Generally made things more awesome</li>
+<li>Simplified syntax</li>
+<li>Combined rem and remBlock mixins</li>
+<li>Added important support</li>
+<li>Removed size and translate mixins (might add back in a future version)</li>
+</ul>
+</li>
+<li>v1.3
+
+<ul>
+<li>Added optional auguments for remBlock</li>
+<li>Added multiple vaules for auguments, though, not very useful just yet</li>
+</ul>
+</li>
+<li>v1.2
+
+<ul>
+<li>Merged translate2d and translate3d mixins</li>
+</ul>
+</li>
+<li>v1.1
+
+<ul>
+<li>Added remBlock to replace simmilar mixins</li>
+</ul>
+</li>
+<li>v1.0
+
+<ul>
+<li>Initial Release</li>
+</ul>
+</li>
+</ul>
+

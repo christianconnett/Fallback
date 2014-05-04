@@ -1,150 +1,105 @@
-# Fallback v1.3
-Fallback is a Sass partial of mixins and functions that converts rem units to pixel units and adds more shorthand.
+# Fallback v1.4
+Fallback is currently a single Sass mixin with a couple small functions that convert rem units to pixel units. Oh, and it does it with shorthand code unlike other rem to px Sass mixins.
 
 
-## General
-1. Only use pixel units.
+## Rules and Stuff
+1. Only use pixel units. Not rems.
 
-2. The px is appended automatically.
+2. Don't include the px. The px is appended automatically.
 	```scss
 	// SCSS
-		@include rem(margin-top, 16);
+		@include rem(margin, 16);
 	```
 	```css
 	/* CSS */
-		margin-top: 16px;
-		margin-top: 1rem;
+		margin: 16px;
+		margin: 1rem;
 	```
 
-3. You can use shorthand.
+3. You can use shorthand!
 	```scss
 	// SCSS
-		@include remBlock(margin, 16, 16, 16, 16);
+		@include rem(margin, 2 4 8 16);
+	```
+	````css
+	/* CSS */
+		margin-top: 2px;
+		margin-top: 0.125rem;
+		margin-right: 4px;
+		margin-right: 0.25rem;
+		margin-bottom: 8px;
+		margin-bottom: 0.5rem;
+		margin-left: 16px;
+		margin-left: 1rem;
+	```
+
+4. Use x to skip a value you don't want to re-define.
+	```scss
+	// SCSS
+		@include rem(margin, 16 x x 16);
 	```
 	````css
 	/* CSS */
 		margin-top: 16px;
 		margin-top: 1rem;
-		margin-right: 16px;
-		margin-right: 1rem;
-		margin-bottom: 16px;
-		margin-bottom: 1rem;
 		margin-left: 16px;
 		margin-left: 1rem;
 	```
 
-4. Use x to skip a value.
+5. To convert rems within parenthesis, you must use the rem function and interpolate. This is purely to be use if you're too lazy to do math because you must manually specify a fallback.
 	```scss
 	// SCSS
-		@include remBlock(margin, 16, x, x, 16);
-	```
-	````css
-	/* CSS */
-		margin-top: 16px;
-		margin-top: 1rem;
-		margin-left: 16px;
-		margin-left: 1rem;
-	```
-
-5. To convert rems within parenthesis, you must use the rem function and interpolate.
-	```scss
-	// SCSS
+		width: calc(25% - 16px);
 		width: calc(25% - #{rem(16)});
 	```
 	```css
 	/* CSS */
+		width: calc(25% - 16px);
 		width: calc(25% - 1rem);
 	```
 
-## Functions
-### Rem
-```scss
-// SCSS
-	width: #{rem(16)};
-```
-```css
-/* CSS */
-	width: 1rem;
-```
-### Px
-*Not For Use*
-```scss
-// SCSS
-	width: #{px(16)};
-```
-```css
-/* CSS */
-	width: 16px;
-```
+6. You can use shorthand for the position property.
+	```scss
+	// SCSS
+		@include rem(position, 2 4 8 16);
+	```
+	````css
+	/* CSS */
+		top: 2px;
+		top: 0.125rem;
+		right: 4px;
+		right: 0.25rem;
+		bottom: 8px;
+		bottom: 0.5rem;
+		left: 16px;
+		left: 1rem;
+	```
 
-## Mixins
-### Rem
-Supports all properties with a single unit value.
-```scss
-// SCSS
-	@include rem(max-width, 16);
-```
-```css
-/* CSS */
-	max-width: 16px;
-	max-width: 1rem;
-```
+7. You can make things important. Leave off the !, it's appended automatically.
+	```scss
+	// SCSS
+		@include rem(margin, 16 x x 16, important);
+	```
+	````css
+	/* CSS */
+		margin-top: 16px !important;
+		margin-top: 1rem !important;
+		margin-left: 16px !important;
+		margin-left: 1rem !important;
+	```
 
-### Size
-Shorthand for width and height.
-```scss
-// SCSS
-	@include size(16, 16);
-```
-```css
-/* CSS */
-	width: 16px;
-	width: 1rem;
-	height: 16px;
-	width: 1rem;
-```
-		
-### Rem Block
-Shorthand for all properies with 4 unit values.
-Adds support for position.
-```scss
-// SCSS
-	@include remBlock(margin, 16, 16, x, x);
-	@include remBlock(position, 16, 16, x, x);
-	position: relative;
-```
-```css
-/* CSS */
-	margin-top: 16px;
-	margin-top: 1rem
-	margin-right: 16px;
-	margin-right: 1rem;
-	top: 16px;
-	top: 1rem
-	right: 16px;
-	right: 1rem;
-```
-
-### Translate
-If only two plains are desired, use an x on the z variable.
-```scss
-// SCSS
-	@include translate(16, 16, x);
-```
-```css
-/* CSS */
-	transform: translateX(16px);
-	transform: translateX(1rem);
-	transform: translateY(16px);
-	transform: translateY(1rem);
-```
 
 ## To-do
-+ Compile css shorthand when possible
-+ Add optional arguments for all mixins
++ Compile CSS shorthand when possible
 + Automate browser prefixes for CSS3
 
 ## Changelog
++ v1.4
+	+ Generally made things more awesome
+	+ Simplified syntax
+	+ Combined rem and remBlock mixins
+	+ Added important support
+	+ Removed size and translate mixins (might add back in a future version)
 + v1.3
 	+ Added optional auguments for remBlock
 	+ Added multiple vaules for auguments, though, not very useful just yet
