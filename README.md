@@ -46,7 +46,7 @@ Fallback is currently a single Sass mixin with a couple small functions that con
 		margin-left: 1rem;
 	```
 
-5. To convert rems within parenthesis, you must use the rem function and interpolate. This is purely to be use if you're too lazy to do math because you must manually specify a fallback.
+5. To convert rems within parenthesis, you must use the rem function and interpolate. This is purely to be used if you're too lazy to do math because you must manually specify a fallback.
 	```scss
 	// SCSS
 		width: calc(25% - 16px);
@@ -75,7 +75,7 @@ Fallback is currently a single Sass mixin with a couple small functions that con
 		left: 1rem;
 	```
 
-7. You can make things important. Leave off the !, it's appended automatically.
+7. You can make things important. Don't include the !. It's appended automatically.
 	```scss
 	// SCSS
 		@include rem(margin, 16 x x 16, important);
