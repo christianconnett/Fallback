@@ -94,6 +94,8 @@ Fallback is currently a single Sass mixin with a couple small functions that con
 + Automate browser prefixes for CSS3
 
 ## Changelog
++ v1.4.1
+	+ Fixed important not being applied
 + v1.4
 	+ Generally made things more awesome
 	+ Simplified syntax
