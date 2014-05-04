@@ -1,4 +1,4 @@
-# Fallback v1.4
+# Fallback v1.4.1
 Fallback is currently a single Sass mixin with a couple small functions that convert rem units to pixel units. Oh, and it does it with shorthand code unlike other rem to px Sass mixins.
 
 
